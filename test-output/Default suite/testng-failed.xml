@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="abhishekbhatacademy.Test.ErrorValidation">
+      <class name="abhishekbhatacademy.Test.SubmitOrderTest">
         <methods>
-          <include name="productvalidation"/>
+          <include name="submitorder"/>
+          <include name="orderHistoryTest"/>
           <include name="closeDriver"/>
         </methods>
-      </class> <!-- abhishekbhatacademy.Test.ErrorValidation -->
+      </class> <!-- abhishekbhatacademy.Test.SubmitOrderTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

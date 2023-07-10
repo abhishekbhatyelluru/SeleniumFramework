@@ -3,6 +3,10 @@
 
 <suite parallel="tests" name="Suite">
 
+<listeners>
+<listener class-name="abhishekbhatacademy.TestComponent.Listeners"></listener>
+</listeners>
+
 
   <test thread-count="5" name="Submit order Test">
     <classes>

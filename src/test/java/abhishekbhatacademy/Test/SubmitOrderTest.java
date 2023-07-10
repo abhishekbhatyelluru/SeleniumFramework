@@ -2,6 +2,7 @@ package abhishekbhatacademy.Test;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,20 +32,20 @@ public class SubmitOrderTest extends BaseTest {
 	String productname="IPHONE 13 PRO";
 
 	@Test(dataProvider="getDataa", groups="perchase")
-	public void submitorder(String email,String password,String productname) throws IOException, InterruptedException
+	public void submitorder(HashMap<String,String> input) throws IOException, InterruptedException
 	{	
 		LandingPage landing=launchApplication();
-		landing.landingpageapplication("yiwovo8122@usharer.com","Asdfghjkl@1234");
+		landing.landingpageapplication(input.get("email"),input.get("password"));
 		
 				
 		ProductCatalogue productcatalogueobj=new ProductCatalogue(driver);
 		List<WebElement> products=productcatalogueobj.getProductList();
 		
-		productcatalogueobj.addToCartClick(productname);
+		productcatalogueobj.addToCartClick(input.get("productname"));
 		productcatalogueobj.gotoCartPage();
 		
 		CartPage cartpageobj=new CartPage(driver);
-		boolean match=cartpageobj.verifyProductDisplay(productname);
+		boolean match=cartpageobj.verifyProductDisplay(input.get("productname"));
 		Assert.assertTrue(match);
 		cartpageobj.gotoCheckout();
 		
@@ -75,15 +76,45 @@ public class SubmitOrderTest extends BaseTest {
 	}
 	
 	
-	@DataProvider
-	public Object[][] getDataa()
-	{
-	 
-		return new Object[][] {{"yiwovo8122@usharer.com","Asdfghjkl@1234","IPHONE 13 PRO"},{"shetty@gmail.com","Iamking@000","ADIDAS ORIGINAL"}};
-		//object means anything,it may be string,int,double
+//	@DataProvider
+//	public Object[][] getDataa()
+//	{
+//	 
+//		return new Object[][] {{"yiwovo8122@usharer.com","Asdfghjkl@1234","IPHONE 13 PRO"},{"shetty@gmail.com","Iamking@000","ADIDAS ORIGINAL"}};
+//		//object means anything,it may be string,int,double
 	
-	}
+//*****************************	
+//	for this type of data provider, this type of calling method in above line
+	
+//	@Test(dataProvider="getDataa", groups="perchase")
+//	public void submitorder(String email,String password,String productname) throws IOException, InterruptedException
+//	{	
+//		LandingPage landing=launchApplication();
+//		landing.landingpageapplication(email,password);
+//	    ..........
+//		
+//	
+//	}
 	
 	
-
+	
+    @DataProvider
+    public Object[][] getDataa()
+    {
+    	HashMap<String,String> map1=new HashMap<String,String>();
+    	map1.put("email","yiwovo8122@usharer.com");
+    	map1.put("password", "Asdfghjkl@1234");
+    	map1.put("productname", "IPHONE 13 PRO");
+    	
+    	HashMap<String,String> map2=new HashMap<String,String>();
+    	map2.put("email","shetty@gmail.com");
+    	map2.put("password", "Iamking@000");
+    	map2.put("productname", "ADIDAS ORIGINAL");
+    	
+    	
+    	return new Object[][] {{map1},{map2}};
+	
+    }
+ 	
+	
 }
